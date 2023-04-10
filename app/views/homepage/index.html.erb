@@ -1,0 +1,40 @@
+<header>
+  <h2>Current Events</h2>
+</header>
+
+<section id="event-list" aria-label="event list">
+  <article
+    class="event"
+    aria-labelledby="event-title"
+    aria-describedby="event-description"
+    tabindex="0"
+    aria-posinset="1"
+    aria-setsize="1"
+  >
+    <a href=".">
+      <h3 class="event-title">RailsConf 2023</h3>
+    </a>
+
+    <figure>
+      <%=
+        image_tag('railsconf_2023.jpg',
+          alt: "RailsConf Banner featuring Atlanta Georgia",
+          height: '200px',
+          width: '300px'
+        )
+      %>
+    </figure>
+
+    <div class="event-description" aria-label="event description">
+      RailsConf, hosted by Ruby Central, is the world's largest and longest-running gathering of Ruby on Rails enthusiasts, practitioners, and companies.
+    </div>
+
+    <div class="event-location" aria-label="event location">
+      210 Peachtree St. NW, Atlanta, Georgia, USA, 30303
+    </div>
+
+    <div class=event-"time" aria-label="event time">
+      <time datetime="2023-04-24 8:00">April 24th</time> to <time datetime="2023-04-26 17:00">April 26th 2023</time>
+    </div>
+  </article>
+</section>

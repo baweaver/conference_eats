@@ -1,0 +1,288 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/lemur/dev/conference_eats/app/helpers/application_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/lemur/dev/conference_eats/app/helpers/homepage_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/lemur/dev/conference_eats/app/models/account_role.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/lemur/dev/conference_eats/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/lemur/dev/conference_eats/app/models/account.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          4,
+          null,
+          null
+        ]
+      },
+      "/Users/lemur/dev/conference_eats/app/models/gathering_account.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/lemur/dev/conference_eats/app/models/gathering_outing_group_account.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          2,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/lemur/dev/conference_eats/app/models/gathering_outing_group.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          3,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          6,
+          null,
+          null
+        ]
+      },
+      "/Users/lemur/dev/conference_eats/app/models/gathering_outing.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          9,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          6,
+          null,
+          null,
+          1,
+          6,
+          null,
+          null
+        ]
+      },
+      "/Users/lemur/dev/conference_eats/app/models/gathering.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/lemur/dev/conference_eats/app/models/profile.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/lemur/dev/conference_eats/app/models/role.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/lemur/dev/conference_eats/app/controllers/homepage_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/lemur/dev/conference_eats/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      }
+    },
+    "timestamp": 1681093764
+  }
+}

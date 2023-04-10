@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ConferenceEats</title>
+    <title>
+      <%= @page_title || "Conference Eats" %>
+    </title>
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <% if notice %>
+      <div class="alert alert-success"><%= notice %></div>
+    <% end %>
+
+    <% if alert %>
+      <div class="alert alert-danger"><%= alert %></div>
+    <% end %>
+
+    <h1>Conference Eats</h1>
+
+    <% if rodauth.logged_in? %>
+      <%= link_to 'Sign out', rodauth.logout_path, method: :post %>
+    <% else %>
+      <%= link_to 'Sign in', rodauth.login_path %>
+      <%= link_to 'Sign up', rodauth.create_account_path %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

@@ -4,3 +4,8 @@
 require_relative "config/application"
 
 Rails.application.load_tasks
+
+desc 'Recreate the DB and seed it'
+task :db_recreate do
+  `rake db:drop db:setup`
+end
