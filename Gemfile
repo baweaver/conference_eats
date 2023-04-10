@@ -78,6 +78,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem 'simplecov', require: false
+  gem 'database_cleaner-active_record'
 end
 
 gem 'http'
@@ -90,3 +91,4 @@ gem 'geo_names'
 gem 'timezone', '~> 1.0'
 
 gem 'rodauth-rails'
+gem 'pundit'

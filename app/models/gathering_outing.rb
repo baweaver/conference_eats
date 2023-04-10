@@ -21,6 +21,7 @@ class GatheringOuting < ApplicationRecord
   def default_group
     gathering_outing_groups.find_or_create_by(
       name: DEFAULT_GATHERING_PLACE,
+      location: gathering.location,
       max_size: NO_LIMIT
     )
   end

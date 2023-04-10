@@ -1,0 +1,39 @@
+<h2><%= @gathering.name %></h2>
+
+<figure>
+  <%=
+    image_tag('railsconf_2023.jpg',
+      alt: "RailsConf Banner featuring Atlanta Georgia",
+      height: '200px',
+      width: '300px'
+    )
+  %>
+</figure>
+
+<div class="gathering-description" aria-label="gathering description">
+  <%= @gathering.description %>
+</div>
+
+<div class="gathering-location" aria-label="gathering location">
+  <%= @gathering.location %>
+</div>
+
+<div class="gathering-time" aria-label="gathering time">
+  <time datetime="<%= @gathering.start_date %>"  aria-label="start date">
+    <%= @gathering.start_date %>
+  </time>
+
+  to
+
+  <time datetime="<%= @gathering.end_date %>"  aria-label="end date">
+    <%= @gathering.end_date %>
+  </time>
+</div>
+
+<h3>Current Outings</h3>
+
+<% @gathering.gathering_outings.each do |outing| %>
+  <article>
+    <h3><%= link_to(outing.name, gathering_gathering_outing_path(outing.id)) %></h3>
+  </article>
+<% end %>

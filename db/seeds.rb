@@ -11,7 +11,7 @@ require 'bcrypt'
 DEFAULT_PASS = 'password'
 DEFAULT_PASS_HASH = BCrypt::Password.create(DEFAULT_PASS).to_s
 
-rails_conf = Gathering.create(
+current_event = Gathering.create(
   name: 'RailsConf 2023',
   start_date: DateTime.new(2023, 04, 24),
   end_date: DateTime.new(2023, 04, 26),
@@ -26,7 +26,36 @@ rails_conf = Gathering.create(
   TEXT
 )
 
-rails_conf_first_night_supper = rails_conf.gathering_outings.create(
+past_event = Gathering.create(
+  name: 'RailsConf 2022',
+  start_date: DateTime.new(2022, 04, 24),
+  end_date: DateTime.new(2022, 04, 26),
+  location: '210 Peachtree St. NW, Atlanta, Georgia, USA, 30303',
+
+  latitude: BigDecimal('33.75911042963162'),
+  longitude: BigDecimal('-84.38828143321112'),
+
+  description: <<~TEXT
+    RailsConf, hosted by Ruby Central, is the world's largest and longest-running gathering of Ruby on Rails enthusiasts, practitioners, and companies.
+  TEXT
+)
+
+future_event = Gathering.create(
+  name: 'RailsConf 2024',
+  start_date: DateTime.new(2024, 04, 24),
+  end_date: DateTime.new(2024, 04, 26),
+  location: '210 Peachtree St. NW, Atlanta, Georgia, USA, 30303',
+
+  # Manual for now, will sort that all out later
+  latitude: BigDecimal('33.75911042963162'),
+  longitude: BigDecimal('-84.38828143321112'),
+
+  description: <<~TEXT
+    RailsConf, hosted by Ruby Central, is the world's largest and longest-running gathering of Ruby on Rails enthusiasts, practitioners, and companies.
+  TEXT
+)
+
+current_event_first_night_supper = current_event.gathering_outings.create(
   name: 'Day 1 Supper',
   start_time: DateTime.new(2023, 04, 24, 5),
   end_time: DateTime.new(2023, 04, 24, 9),
@@ -82,6 +111,6 @@ accounts = Account.create([
   },
 ])
 
-rails_conf.accounts = accounts
+current_event.accounts = accounts
 
 admin = Role.create(name: 'admin')

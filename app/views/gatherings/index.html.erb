@@ -1,0 +1,26 @@
+<% if @gatherings.any?(&:current?) %>
+  <h2>Current Gatherings</h2>
+
+  <%= render(
+    partial: 'gathering_list',
+    locals: { gatherings: @gatherings.select(&:current?) }
+  ) %>
+<% end %>
+
+<% if @gatherings.any?(&:future?) %>
+  <h2>Upcomming Gatherings</h2>
+
+  <%= render(
+    partial: 'gathering_list',
+    locals: { gatherings: @gatherings.select(&:future?) }
+  ) %>
+<% end %>
+
+<% if @gatherings.any?(&:past?) %>
+  <h2>Past Gatherings</h2>
+
+  <%= render(
+    partial: 'gathering_list',
+    locals: { gatherings: @gatherings.select(&:past?) }
+  ) %>
+<% end %>

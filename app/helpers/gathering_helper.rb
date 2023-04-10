@@ -1,0 +1,2 @@
+module GatheringHelper
+end

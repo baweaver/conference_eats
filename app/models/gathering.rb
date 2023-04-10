@@ -18,6 +18,32 @@ class Gathering < ApplicationRecord
   has_many :gathering_accounts
   has_many :accounts, through: :gathering_accounts
 
+  validates :start_date, comparison: { less_than: :end_date }
+
+  def self.in_the_future(now: Time.now)
+    where('start_date >= ?', now)
+  end
+
+  def self.currently_running(now: Time.now)
+    where('start_date <= ? AND end_date >= ?', now, now)
+  end
+
+  def self.in_the_past(now: Time.now)
+    where('end_date <= ?', now)
+  end
+
+  def future?
+    start_date >= Time.now
+  end
+
+  def past?
+    Time.now > end_date
+  end
+
+  def current?
+    date_range.cover?(Time.now)
+  end
+
   # Should really consider localized time zones on this
   def date_range
     start_date..end_date
