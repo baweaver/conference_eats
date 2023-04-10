@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: gathering_outings
+# Table name: outings
 #
 #  id           :bigint           not null, primary key
 #  name         :string
@@ -13,11 +13,11 @@
 #
 require 'rails_helper'
 
-RSpec.describe GatheringOuting, type: :model do
+RSpec.describe Outing, type: :model do
   let(:gathering) { create(:gathering) }
 
   subject do
-    create(:gathering_outing, gathering:)
+    create(:outing, gathering:)
   end
 
   it 'is valid' do
@@ -26,7 +26,7 @@ RSpec.describe GatheringOuting, type: :model do
 
   describe '#default_group' do
     it 'acts as a lobby for people entering the outing' do
-      expect(subject.default_group).to be_a(GatheringOutingGroup)
+      expect(subject.default_group).to be_a(Group)
     end
   end
 

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :gatherings, except: %i[create new update edit destroy] do
-    resources :gathering_outings do
-      resources :gathering_outing_groups
+    resources :outings do
+      resources :groups
     end
   end
 

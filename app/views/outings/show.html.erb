@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @outing %>
+
+<div>
+  <%= link_to "Edit this gathering outing", edit_gathering_outing_path(@outing) %> |
+  <%= link_to "Back to gathering outings", gathering_outings_path %>
+
+  <%= button_to "Destroy this gathering outing", gathering_outings_path, method: :delete %>
+</div>

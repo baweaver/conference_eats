@@ -5,7 +5,7 @@ class GatheringsController < ApplicationController
 
   def show
     @gathering = Gathering
-      .includes(:gathering_outings)
+      .includes(:outings)
       .find(params[:id])
   end
 

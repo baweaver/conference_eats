@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_10_011742) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_10_052925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -78,45 +78,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_10_011742) do
     t.index ["stream", "position"], name: "index_event_store_events_in_streams_on_stream_and_position", unique: true
   end
 
-  create_table "gathering_accounts", force: :cascade do |t|
+  create_table "gathering_members", force: :cascade do |t|
     t.bigint "gathering_id", null: false
     t.boolean "blocked"
     t.text "block_reason"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "account_id"
-    t.index ["account_id"], name: "index_gathering_accounts_on_account_id"
-  end
-
-  create_table "gathering_outing_group_accounts", force: :cascade do |t|
-    t.bigint "gathering_outing_group_id", null: false
-    t.string "status"
-    t.date "status_updated_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "account_id"
-    t.index ["account_id"], name: "index_gathering_outing_group_accounts_on_account_id"
-  end
-
-  create_table "gathering_outing_groups", force: :cascade do |t|
-    t.bigint "gathering_outing_id", null: false
-    t.string "name"
-    t.string "location"
-    t.integer "max_size"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["gathering_outing_id"], name: "index_gathering_outing_groups_on_gathering_outing_id"
-  end
-
-  create_table "gathering_outings", force: :cascade do |t|
-    t.string "name"
-    t.date "start_time"
-    t.date "end_time"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "gathering_id"
-    t.index ["gathering_id"], name: "index_gathering_outings_on_gathering_id"
+    t.index ["account_id"], name: "index_gathering_members_on_account_id"
   end
 
   create_table "gatherings", force: :cascade do |t|
@@ -129,6 +98,38 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_10_011742) do
     t.string "location"
     t.decimal "latitude", precision: 18, scale: 15
     t.decimal "longitude", precision: 18, scale: 15
+  end
+
+  create_table "group_members", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.string "status"
+    t.date "status_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "account_id"
+    t.index ["account_id"], name: "index_group_members_on_account_id"
+    t.index ["group_id"], name: "index_group_members_on_group_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.bigint "outing_id", null: false
+    t.string "name"
+    t.string "location"
+    t.integer "max_size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["outing_id"], name: "index_groups_on_outing_id"
+  end
+
+  create_table "outings", force: :cascade do |t|
+    t.string "name"
+    t.date "start_time"
+    t.date "end_time"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "gathering_id"
+    t.index ["gathering_id"], name: "index_outings_on_gathering_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -153,8 +154,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_10_011742) do
   add_foreign_key "account_roles", "roles"
   add_foreign_key "account_verification_keys", "accounts", column: "id"
   add_foreign_key "accounts", "profiles"
-  add_foreign_key "gathering_accounts", "gatherings"
-  add_foreign_key "gathering_outing_group_accounts", "gathering_outing_groups"
-  add_foreign_key "gathering_outing_groups", "gathering_outings"
+  add_foreign_key "gathering_members", "gatherings"
+  add_foreign_key "group_members", "groups"
+  add_foreign_key "groups", "outings"
   add_foreign_key "profiles", "accounts"
 end

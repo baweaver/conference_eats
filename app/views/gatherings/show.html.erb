@@ -32,8 +32,8 @@
 
 <h3>Current Outings</h3>
 
-<% @gathering.gathering_outings.each do |outing| %>
+<% @gathering.outings.each do |outing| %>
   <article>
-    <h3><%= link_to(outing.name, gathering_gathering_outing_path(outing.id)) %></h3>
+    <h3><%= link_to(outing.name, gathering_outing_path(outing.id)) %></h3>
   </article>
 <% end %>

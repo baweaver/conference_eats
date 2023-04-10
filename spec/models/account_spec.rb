@@ -2,11 +2,11 @@
 #
 # Table name: accounts
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  company    :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :bigint           not null, primary key
+#  status        :integer          default("unverified"), not null
+#  email         :citext           not null
+#  password_hash :string
+#  profile_id    :bigint
 #
 require 'rails_helper'
 

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: gathering_outings
+# Table name: outings
 #
 #  id           :bigint           not null, primary key
 #  name         :string
@@ -11,15 +11,15 @@
 #  updated_at   :datetime         not null
 #  gathering_id :string
 #
-class GatheringOuting < ApplicationRecord
+class Outing < ApplicationRecord
   belongs_to :gathering
-  has_many :gathering_outing_groups
+  has_many :groups
 
   DEFAULT_GATHERING_PLACE = 'Gathering Venue'
   NO_LIMIT = -1
 
   def default_group
-    gathering_outing_groups.find_or_create_by(
+    groups.find_or_create_by(
       name: DEFAULT_GATHERING_PLACE,
       location: gathering.location,
       max_size: NO_LIMIT

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: gathering_accounts
+# Table name: gathering_members
 #
 #  id           :bigint           not null, primary key
 #  gathering_id :bigint           not null
@@ -10,11 +10,7 @@
 #  updated_at   :datetime         not null
 #  account_id   :bigint
 #
-FactoryBot.define do
-  factory :gathering_account do
-    event { nil }
-    account { nil }
-    blocked { false }
-    block_reason { "MyText" }
-  end
+class GatheringMember < ApplicationRecord
+  belongs_to :gathering
+  belongs_to :account
 end

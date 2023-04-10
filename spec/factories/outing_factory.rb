@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: gathering_outings
+# Table name: outings
 #
 #  id           :bigint           not null, primary key
 #  name         :string
@@ -12,7 +12,7 @@
 #  gathering_id :string
 #
 FactoryBot.define do
-  factory :gathering_outing do
+  factory :outing do
     name { "MyString" }
     start_time { "2023-03-30" }
     end_time { "2023-03-30" }

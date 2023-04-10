@@ -14,9 +14,9 @@
 #  longitude   :decimal(18, 15)
 #
 class Gathering < ApplicationRecord
-  has_many :gathering_outings
-  has_many :gathering_accounts
-  has_many :accounts, through: :gathering_accounts
+  has_many :outings
+  has_many :gathering_members
+  has_many :accounts, through: :gathering_members
 
   validates :start_date, comparison: { less_than: :end_date }
 
