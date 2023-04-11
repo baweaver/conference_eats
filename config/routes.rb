@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :gatherings, except: %i[create new update edit destroy] do
     resources :outings do
+      post :join
+
       resources :groups
     end
   end

@@ -1,6 +1,6 @@
 class OutingsController < ApplicationController
   before_action :set_gathering
-  before_action :set_outing, only: %i[ show edit update destroy ]
+  before_action :set_outing, only: %i[ show edit update destroy join ]
 
   # GET /outings or /outings.json
   def index
@@ -20,31 +20,28 @@ class OutingsController < ApplicationController
   def edit
   end
 
+  def join
+    @group = @outing.assign_to_group(current_account)
+    redirect_to gathering_outing_group_url(id: @group.id, gathering_id: @gathering.id)
+  end
+
   # POST /outings or /outings.json
   def create
     @outing = @gathering.outings.build(outing_params)
 
-    respond_to do |format|
-      if @outing.save
-        format.html { redirect_to gathering_outing_url(@outing), notice: "Gathering outing was successfully created." }
-        format.json { render :show, status: :created, location: @outing }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @outing.errors, status: :unprocessable_entity }
-      end
+    if @outing.save
+      redirect_to gathering_outing_url(@outing), notice: "Gathering outing was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /outings/1 or /outings/1.json
   def update
-    respond_to do |format|
-      if @outing.update(outing_params)
-        format.html { redirect_to gathering_outing_url(@outing), notice: "Gathering outing was successfully updated." }
-        format.json { render :show, status: :ok, location: @outing }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @outing.errors, status: :unprocessable_entity }
-      end
+    if @outing.update(outing_params)
+      redirect_to gathering_outing_url(@outing), notice: "Gathering outing was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -52,16 +49,16 @@ class OutingsController < ApplicationController
   def destroy
     @outing.destroy
 
-    respond_to do |format|
-      format.html { redirect_to gathering_outings_url, notice: "Gathering outing was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to gathering_outings_url, notice: "Gathering outing was successfully destroyed."
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_outing
-      @outing = @gathering.outings.find(params[:id])
+      @outing = @gathering
+        .outings
+        .includes(:groups)
+        .find(params[:outing_id])
     end
 
     def set_gathering

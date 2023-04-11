@@ -14,7 +14,12 @@ class GroupMember < ApplicationRecord
   belongs_to :group
   belongs_to :account
 
-  scope :confirmed, -> { where(status: 'confirmed') }
-  scope :declined, -> { where(status: 'declined') }
-  scope :unknown, -> { where(status: 'unknown') }
+  CONFIRMED = 'confirmed'
+  DECLINED = 'declined'
+  UNKNOWN = 'unknown'
+
+  scope :confirmed, -> { where(status: CONFIRMED) }
+  scope :declined, -> { where(status: DECLINED) }
+  scope :unknown, -> { where(status: UNKNOWN) }
+  scope :not_declined, -> { where.not(status: DECLINED) }
 end

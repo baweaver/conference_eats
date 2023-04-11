@@ -1,3 +1,37 @@
 <div id="<%= dom_id outing %>">
-  <%= outing.name %>
+  <h3><%= outing.name %></h3>
+
+  <div class="outing-description" aria-label="outing description">
+    <% 'Eventually: @outing.description' %>
+    <%= 'Some fake description' %>
+  </div>
+
+  <div class="outing-location" aria-label="outing location">
+    Attendees will be meeting at <%= @gathering.location %> to find their groups.
+  </div>
+
+  <div class="outing-time" aria-label="outing time">
+    <time datetime="<%= outing.start_time %>" aria-label="start date">
+      <%= outing.start_time.to_formatted_s(:short) %>
+    </time>
+
+    to
+
+    <time datetime="<%= outing.end_time %>" aria-label="end date">
+      <%= outing.end_time.to_formatted_s(:short) %>
+    </time>
+  </div>
+
+  <%= button_to "Join Group", gathering_outing_join_path(outing_id: outing.id) %>
+
+  <%# Probably make this Admin %>
+  <div class="outing-groups"  aria-label="outing groups">
+    There are currently <%= outing.default_group.participating_count %> attendees participating.
+
+    <ul>
+      <% outing.groups.each do |group| %>
+        <li><%= group.name %></li>
+      <% end %>
+    </ul>
+  </div>
 </div>

@@ -18,6 +18,38 @@ class Outing < ApplicationRecord
   DEFAULT_GATHERING_PLACE = 'Gathering Venue'
   NO_LIMIT = -1
 
+  def assign_to_group(account)
+    potential_groups = open_groups
+
+    # If there are no groups make one
+    selected_group = if potential_groups.any?
+      potential_groups.first
+    else
+      Group.generate_new.tap { groups << _1 }
+    end
+
+    selected_group.assign_to_group(account)
+    selected_group
+  end
+
+  # Update this to deal with declines later
+  def full_groups
+    groups
+      .excluding_lobby
+      .joins(:group_members)
+      .group('groups.id')
+      .having('count(group_id) >= max_size')
+  end
+
+  # Update this to deal with declines later
+  def open_groups
+    groups
+      .excluding_lobby
+      .joins(:group_members)
+      .group('groups.id')
+      .having('count(group_id) < max_size')
+  end
+
   def default_group
     groups.find_or_create_by(
       name: DEFAULT_GATHERING_PLACE,
@@ -27,7 +59,7 @@ class Outing < ApplicationRecord
   end
 
   def join_lobby(account)
-    default_group.accounts << account
+    default_group.assign_to_group(account)
   end
 
   def populate_lobby
