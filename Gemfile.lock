@@ -339,6 +339,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    test-prof (1.2.1)
     thor (1.2.1)
     tilt (2.1.0)
     timeout (0.3.2)
@@ -400,6 +401,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   stimulus-rails
+  test-prof
   timezone (~> 1.0)
   turbo-rails
   tzinfo-data

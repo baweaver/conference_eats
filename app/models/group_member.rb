@@ -16,20 +16,33 @@ class GroupMember < ApplicationRecord
 
   CONFIRMED = 'confirmed'
   DECLINED = 'declined'
-  UNKNOWN = 'unknown'
+  PENDING = 'pending'
 
-  attribute :status, default: -> { UNKNOWN }
+  attribute :status, default: -> { PENDING }
   attribute :status_updated_at, default: -> { Time.now }
 
   scope :confirmed, -> { where(status: CONFIRMED) }
   scope :declined, -> { where(status: DECLINED) }
-  scope :unknown, -> { where(status: UNKNOWN) }
+  scope :pending, -> { where(status: PENDING) }
   scope :not_declined, -> { where.not(status: DECLINED) }
 
   scope :account_confirmed, -> account { where(account_id: account.id).confirmed }
   scope :account_declined, -> account { where(account_id: account.id).declined }
-  scope :account_pending, -> account { where(account_id: account.id).unknown }
+  scope :account_pending, -> account { where(account_id: account.id).pending }
 
   # Inversion
-  scope :account_not_declined, -> account { where.not(account_id: account.id, status: DECLINED) }
+  scope :account_not_declined, -> account { where(account_id: account.id).not_declined }
+
+
+  def self.account_not_in(account)
+    left_joins(:account).where.not('account.id' => account.id)
+  end
+
+  def self.account_not_declined_outer(account)
+    left_joins(:account).where(account_id: account.id).where.not(status: DECLINED)
+  end
+
+  def self.account_not_in_or_declined(account)
+    account_not_in(account).or(account_not_declined_outer(account))
+  end
 end

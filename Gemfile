@@ -79,6 +79,8 @@ group :test do
   gem "webdrivers"
   gem 'simplecov', require: false
   gem 'database_cleaner-active_record'
+
+  gem 'test-prof'
 end
 
 gem 'http'

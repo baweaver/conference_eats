@@ -32,7 +32,7 @@ class Group < ApplicationRecord
   def self.not_declined_by(account)
     # Include non-existing accounts on left-side
     left_joins(:group_members)
-      .merge(GroupMember.account_not_declined(account))
+      .merge(GroupMember.account_not_in_or_declined(account))
       .distinct
   end
 
@@ -71,5 +71,12 @@ class Group < ApplicationRecord
 
   def participating_count
     group_members.not_declined.count
+  end
+
+  def test_report
+    {
+      group: name,
+      member_stats: group_members.to_h { [_1.account_id, _1.status] }
+    }.then { puts JSON.pretty_generate(_1) }
   end
 end
