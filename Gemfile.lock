@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    action_policy (0.6.5)
+      ruby-next-core (>= 0.14.0)
     actioncable (7.0.4.3)
       actionpack (= 7.0.4.3)
       activesupport (= 7.0.4.3)
@@ -212,8 +214,6 @@ GEM
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
-    pundit (2.3.0)
-      activesupport (>= 3.0.0)
     racc (1.6.2)
     rack (2.2.6.4)
     rack-test (2.1.0)
@@ -305,6 +305,7 @@ GEM
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
     rspec-support (3.12.0)
+    ruby-next-core (0.15.3)
     ruby_event_store (2.9.1)
       concurrent-ruby (~> 1.0, >= 1.1.6)
     ruby_event_store-active_record (2.9.1)
@@ -375,6 +376,7 @@ PLATFORMS
   x86_64-darwin-21
 
 DEPENDENCIES
+  action_policy
   annotate
   bootsnap
   capybara
@@ -391,7 +393,6 @@ DEPENDENCIES
   jsbundling-rails
   pg
   puma (~> 5.0)
-  pundit
   rails (~> 7.0.4, >= 7.0.4.3)
   rails_event_store (~> 2.9.1)
   redis (~> 4.0)

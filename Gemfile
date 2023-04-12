@@ -93,4 +93,4 @@ gem 'geo_names'
 gem 'timezone', '~> 1.0'
 
 gem 'rodauth-rails'
-gem 'pundit'
+gem 'action_policy'

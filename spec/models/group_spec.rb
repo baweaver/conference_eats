@@ -72,6 +72,7 @@ RSpec.describe Group, type: :model do
     let_it_be(:outing) { create(:outing, name: 'Group Size Test', gathering:) }
     let_it_be(:accounts) { 5.times.map { create(:account, email: "#{_1}@test.com") } }
 
+    let_it_be(:pending_account) { accounts.first }
     let_it_be(:declined_account) { accounts[3] }
 
     let_it_be(:lobby_group) do
@@ -125,6 +126,17 @@ RSpec.describe Group, type: :model do
 
         expect(not_lobby_groups).to include(full_group, not_full_group, not_full_group_with_decline)
         expect(not_lobby_groups).not_to include(lobby_group)
+      end
+    end
+
+    # Scoping these to an outing as it makes far more sense there
+    describe '.has_live_membership?' do
+      it 'finds if an account is a member of a group' do
+        expect(outing.groups.has_live_membership?(pending_account)).to eq(true)
+      end
+
+      it 'marks a declined account as not having a live membership' do
+        expect(outing.groups.has_live_membership?(declined_account)).to eq(false)
       end
     end
   end
