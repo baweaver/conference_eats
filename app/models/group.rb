@@ -22,22 +22,39 @@ class Group < ApplicationRecord
   DEFAULT_SIZE = 6 # Make this smarter later
   LOCATION_PENDING = 'TBD'
 
+  # Defaults
+  attribute :name, default: -> { GroupNameGenerator.get_name }
+  attribute :max_size, default: -> { DEFAULT_SIZE }
+  attribute :location, default: -> { LOCATION_PENDING }
+
   scope :excluding_lobby, -> { where.not(max_size: UNBOUNDED_SIZE) }
 
-  def self.generate_new
-    new(
-      name: GroupNameGenerator.get_name,
-      location: LOCATION_PENDING,
-      max_size: DEFAULT_SIZE
-    )
+  def self.not_declined_by(account)
+    # Include non-existing accounts on left-side
+    left_joins(:group_members)
+      .merge(GroupMember.account_not_declined(account))
+      .distinct
+  end
+
+  def self.not_full
+    excluding_lobby
+      .left_joins(:group_members) # Include zero counts
+      .group('groups.id')
+      .having('count(group_members) < max_size')
+  end
+
+  def self.full
+    excluding_lobby
+      .left_joins(:group_members) # Include zero counts
+      .group('groups.id')
+      .having('count(group_members) >= max_size')
   end
 
   def assign_to_group(account)
-    group_members.create(
-      account: account,
-      status: GroupMember::UNKNOWN,
-      status_updated_at: Time.now
-    )
+    # Should not happen with above check, need to think on this
+    return false if group_members.exists?(account:, status: 'declined')
+
+    accounts << account
   end
 
   def full?

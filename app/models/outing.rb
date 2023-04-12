@@ -19,13 +19,16 @@ class Outing < ApplicationRecord
   NO_LIMIT = -1
 
   def assign_to_group(account)
-    potential_groups = open_groups
+    # TODO: Handle case where rejoin, but has a group, and not declined
+    #
+
+    potential_groups = groups.not_full.not_declined_by(account)
 
     # If there are no groups make one
     selected_group = if potential_groups.any?
       potential_groups.first
     else
-      Group.generate_new.tap { groups << _1 }
+      Group.new.tap { groups << _1 }
     end
 
     selected_group.assign_to_group(account)

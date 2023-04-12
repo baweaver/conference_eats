@@ -55,7 +55,7 @@ future_event = Gathering.create(
   TEXT
 )
 
-current_event_first_night_supper = current_event.gathering_outings.create(
+current_event_first_night_supper = current_event.outings.create(
   name: 'Day 1 Supper',
   start_time: DateTime.new(2023, 04, 24, 5),
   end_time: DateTime.new(2023, 04, 24, 9),
@@ -112,5 +112,14 @@ accounts = Account.create([
 ])
 
 current_event.accounts = accounts
+current_event_first_night_supper.populate_lobby
 
 admin = Role.create(name: 'admin')
+me = Account.create(
+  email: 'brandon@doesnotexist.com',
+  status: 2,
+  password_hash: DEFAULT_PASS_HASH,
+  profile_attributes: { name: 'Brandon W', company: 'B' }
+)
+
+me.roles << admin
