@@ -9,32 +9,37 @@ class OutingsController < ApplicationController
 
   # GET /outings/1 or /outings/1.json
   def show
+    authorize!(@outing)
+
+    @assigned_group = @outing.assigned_group(current_account)
   end
 
   # GET /outings/new
-  def new
-    @outing = @gathering.outings.build
-  end
+  # def new
+  #   @outing = @gathering.outings.build
+  # end
 
   # GET /outings/1/edit
   def edit
   end
 
   def join
+    authorize!(@outing)
+
     @group = @outing.assign_to_group(current_account)
     redirect_to gathering_outing_group_url(id: @group.id, gathering_id: @gathering.id)
   end
 
   # POST /outings or /outings.json
-  def create
-    @outing = @gathering.outings.build(outing_params)
+  # def create
+  #   @outing = @gathering.outings.build(outing_params)
 
-    if @outing.save
-      redirect_to gathering_outing_url(@outing), notice: "Gathering outing was successfully created."
-    else
-      render :new, status: :unprocessable_entity
-    end
-  end
+  #   if @outing.save
+  #     redirect_to gathering_outing_url(@outing), notice: "Gathering outing was successfully created."
+  #   else
+  #     render :new, status: :unprocessable_entity
+  #   end
+  # end
 
   # PATCH/PUT /outings/1 or /outings/1.json
   def update
@@ -46,11 +51,11 @@ class OutingsController < ApplicationController
   end
 
   # DELETE /outings/1 or /outings/1.json
-  def destroy
-    @outing.destroy
+  # def destroy
+  #   @outing.destroy
 
-    redirect_to gathering_outings_url, notice: "Gathering outing was successfully destroyed."
-  end
+  #   redirect_to gathering_outings_url, notice: "Gathering outing was successfully destroyed."
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -58,7 +63,7 @@ class OutingsController < ApplicationController
       @outing = @gathering
         .outings
         .includes(:groups)
-        .find(params[:outing_id])
+        .find(params[:outing_id] || params[:id]) # Fix this later. Don't like
     end
 
     def set_gathering

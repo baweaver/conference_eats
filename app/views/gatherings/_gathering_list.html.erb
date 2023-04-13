@@ -8,9 +8,9 @@
       aria-posinset="1"
       aria-setsize="1"
     >
-      <a href="<%= gathering_path(gathering.id) %>">
+      <%= link_to gathering_path(gathering) do %>
         <h3 class="gathering-title"><%= gathering.name %></h3>
-      </a>
+      <% end %>
 
       <figure>
         <%=

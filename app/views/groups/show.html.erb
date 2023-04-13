@@ -4,7 +4,7 @@
 
 <div>
   <%= link_to "Edit this group", edit_gathering_outing_group_path(@group) %> |
-  <%= link_to "Back to groups", gathering_outing_groups_path %>
+  <%= link_to "Back to outing", gathering_outing_path(id: @group.outing_id) %>
 
   <%= button_to "Destroy this group", gathering_outing_group_path(@group), method: :delete %>
 </div>

@@ -7,6 +7,8 @@ class GatheringsController < ApplicationController
     @gathering = Gathering
       .includes(:outings)
       .find(params[:id])
+
+    authorize!(@gathering)
   end
 
   def create

@@ -4,8 +4,8 @@
 #
 #  id           :bigint           not null, primary key
 #  name         :string
-#  start_time   :date
-#  end_time     :date
+#  start_time   :datetime
+#  end_time     :datetime
 #  description  :text
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

@@ -22,7 +22,20 @@
     </time>
   </div>
 
-  <%= button_to "Join Group", gathering_outing_join_path(outing_id: outing.id) %>
+  <% if @assigned_group.present? %>
+    Your Group: <%=
+      link_to(
+        @assigned_group.name,
+        gathering_outing_group_path(
+          gathering_id: @outing.gathering_id,
+          outing_id: @outing.id,
+          id: @assigned_group.id
+        )
+      )
+    %>
+  <% else %>
+    <%= button_to "Join Group", gathering_outing_join_path(outing_id: outing.id) %>
+  <% end %>
 
   <%# Probably make this Admin %>
   <div class="outing-groups"  aria-label="outing groups">

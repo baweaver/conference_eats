@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     resources :outings do
       post :join
 
-      resources :groups
+      # Other actions are handled by the outing or by an admin
+      resources :groups, except: %i[index new create destroy]
     end
   end
 
@@ -11,5 +12,5 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "homepage#index"
+  root "gatherings#index"
 end

@@ -4,8 +4,8 @@
 #
 #  id           :bigint           not null, primary key
 #  name         :string
-#  start_time   :date
-#  end_time     :date
+#  start_time   :datetime
+#  end_time     :datetime
 #  description  :text
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -32,6 +32,10 @@ class Outing < ApplicationRecord
 
     selected_group.assign_to_group(account)
     selected_group
+  end
+
+  def assigned_group(account)
+    groups.excluding_lobby.current_membership(account)
   end
 
   # Update this to deal with declines later

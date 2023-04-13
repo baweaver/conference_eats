@@ -43,6 +43,13 @@ class Group < ApplicationRecord
       .exists?
   end
 
+  def self.current_membership(account)
+    excluding_lobby
+      .joins(:group_members)
+      .merge(GroupMember.account_not_declined(account))
+      .first
+  end
+
   # Find groups where the account has not explicitly declined, nor
   # is included in
   def self.not_declined_by(account)

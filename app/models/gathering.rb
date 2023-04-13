@@ -32,6 +32,10 @@ class Gathering < ApplicationRecord
     where('end_date <= ?', now)
   end
 
+  def member?(account)
+    gathering_members.where(account_id: account.id).exists?
+  end
+
   def future?
     start_date >= Time.now
   end

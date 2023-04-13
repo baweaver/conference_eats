@@ -6,8 +6,11 @@ class GroupPolicy < ApplicationPolicy
     admin? || record.member?(user)
   end
 
-  # Only logged in users
+  # Only the admin can get a full view of every group, just so
+  # we avoid people seeing who all might be going where.
+  #
+  # The actual listing will happen on the outing.
   def index?
-    user.present?
+    admin?
   end
 end

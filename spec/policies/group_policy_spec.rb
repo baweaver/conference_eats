@@ -46,18 +46,11 @@ RSpec.describe GroupPolicy do
   end
 
   describe '#index?' do
+    let(:user) { create(:account).tap { _1.roles << create(:role, name: 'admin')} }
     subject { policy.apply(:index?) }
 
-    it 'can be seen by online users' do
+    it 'can be seen by the admin' do
       expect(subject).to eq(true)
-    end
-
-    context 'When no user is logged in' do
-      let(:user) { nil }
-
-      it 'fails' do
-        expect(subject).to eq(false)
-      end
     end
   end
 end

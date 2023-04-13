@@ -34,6 +34,8 @@
 
 <% @gathering.outings.each do |outing| %>
   <article>
-    <h3><%= link_to(outing.name, gathering_outing_path(outing.id)) %></h3>
+    <%= link_to(gathering_outing_path(gathering_id: @gathering.id, id: outing)) do %>
+      <h3><%= outing.name %></h3>
+    <% end %>
   </article>
 <% end %>
