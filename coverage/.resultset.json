@@ -833,18 +833,8 @@
           null,
           null
         ]
-      },
-      "/Users/lemur/dev/conference_eats/app/controllers/homepage_controller.rb": {
-        "lines": [
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
       }
     },
-    "timestamp": 1681376079
+    "timestamp": 1681376191
   }
 }
