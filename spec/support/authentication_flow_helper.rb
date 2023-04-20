@@ -4,8 +4,8 @@ module AuthenticationFlowHelper
 
     expect(page).to have_button('Login')
 
-    fill_in 'Login', with: account.email
-    fill_in 'Password', with: 'password'
+    fill_in 'Login', with: email
+    fill_in 'Password', with: password
 
     click_on 'Login'
 

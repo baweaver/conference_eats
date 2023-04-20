@@ -14,25 +14,32 @@
   </head>
 
   <body>
-    <% if notice %>
-      <div class="alert alert-success"><%= notice %></div>
-    <% end %>
+    <header>
+      <% if notice %>
+        <div class="alert alert-success"><%= notice %></div>
+      <% end %>
 
-    <% if alert %>
-      <div class="alert alert-danger"><%= alert %></div>
-    <% end %>
+      <% if alert %>
+        <div class="alert alert-danger"><%= alert %></div>
+      <% end %>
 
-    <h1>Conference Eats</h1>
+      <h1>Conference Eats</h1>
 
-    <% if rodauth.logged_in? %>
-      <%= link_to 'Sign out', rodauth.logout_path, method: :post %>
-    <% else %>
-      <%= link_to 'Sign in', rodauth.login_path %>
-      <%= link_to 'Sign up', rodauth.create_account_path %>
-    <% end %>
+      <hr>
 
-    <hr>
+      <% if rodauth.logged_in? %>
+        <%= current_account.profile&.name || current_account.email %> |
+        <%= link_to 'Sign out', rodauth.logout_path, method: :post %>
+      <% else %>
+        <%= link_to 'Sign in', rodauth.login_path %>
+        <%= link_to 'Sign up', rodauth.create_account_path %>
+      <% end %>
 
-    <%= yield %>
+      <hr>
+    </header>
+
+    <main role="main">
+      <%= yield %>
+    </main>
   </body>
 </html>

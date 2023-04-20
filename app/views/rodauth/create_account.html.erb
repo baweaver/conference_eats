@@ -12,7 +12,7 @@
         aria: (
           {
             invalid: true,
-            describedby: 'login_error_message'
+            describedby: 'name_error_message'
           } if rodauth.field_error('name')
         )
       )
@@ -22,7 +22,7 @@
       content_tag(:span,
         rodauth.field_error('name'),
         class: 'invalid-feedback',
-        id: 'login_error_message'
+        id: 'name_error_message'
       ) if rodauth.field_error('name')
     %>
   </div>
@@ -34,14 +34,14 @@
     <%=
       form.email_field(rodauth.login_param,
         value: params[rodauth.login_param],
-        id: "login",
+        id: "email",
         autocomplete: "email",
         required: true,
         class: "form-control #{"is-invalid" if rodauth.field_error(rodauth.login_param)}",
         aria: (
           {
             invalid: true,
-            describedby: "login_error_message"
+            describedby: "email_error_message"
           } if rodauth.field_error(rodauth.login_param)
         )
       )
@@ -51,7 +51,7 @@
       content_tag(:span,
         rodauth.field_error(rodauth.login_param),
         class: "invalid-feedback",
-        id: "login_error_message"
+        id: "email_error_message"
       ) if rodauth.field_error(rodauth.login_param)
     %>
   </div>

@@ -2,12 +2,32 @@
   <h3><%= outing.name %></h3>
 
   <div class="outing-description" aria-label="outing description">
-    <% 'Eventually: @outing.description' %>
-    <%= 'Some fake description' %>
+    <%= outing.description %>
   </div>
 
   <div class="outing-location" aria-label="outing location">
     Attendees will be meeting at <%= @gathering.location %> to find their groups.
+  </div>
+
+  <div class="outing-group" aria-label="outing group">
+    <% if @assigned_group.present? %>
+      Your Group is: <%=
+        link_to(
+          @assigned_group.name,
+          gathering_outing_group_path(
+            gathering_id: outing.gathering_id,
+            outing_id: outing.id,
+            id: @assigned_group.id
+          )
+        )
+      %>
+
+      <br>
+
+      They are currently meeting at <%= @assigned_group.location %>
+    <% else %>
+      <%= button_to "Join Group", gathering_outing_join_path(outing_id: outing.id) %>
+    <% end %>
   </div>
 
   <div class="outing-time" aria-label="outing time">
@@ -22,29 +42,22 @@
     </time>
   </div>
 
-  <% if @assigned_group.present? %>
-    Your Group: <%=
-      link_to(
-        @assigned_group.name,
-        gathering_outing_group_path(
-          gathering_id: @outing.gathering_id,
-          outing_id: @outing.id,
-          id: @assigned_group.id
-        )
-      )
-    %>
-  <% else %>
-    <%= button_to "Join Group", gathering_outing_join_path(outing_id: outing.id) %>
-  <% end %>
-
   <%# Probably make this Admin %>
-  <div class="outing-groups"  aria-label="outing groups">
-    There are currently <%= outing.default_group.participating_count %> attendees participating.
+  <% if current_account.admin? %>
+    <div class="outing-groups"  aria-label="outing groups">
+      There are currently <%= outing.default_group.participating_count %> attendees participating. The current groups are:
 
-    <ul>
-      <% outing.groups.each do |group| %>
-        <li><%= group.name %></li>
-      <% end %>
-    </ul>
-  </div>
+      <ul>
+        <% outing.groups.each do |group| %>
+          <li>
+            <%= link_to group.name, gathering_outing_group_path(
+              gathering_id: outing.gathering_id,
+              outing_id: outing.id,
+              id: group.id
+            ) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 </div>
