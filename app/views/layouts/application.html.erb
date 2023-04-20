@@ -10,32 +10,56 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
   </head>
 
-  <body>
+  <body class="container-fluid">
     <header>
       <% if notice %>
-        <div class="alert alert-success"><%= notice %></div>
+        <div class="alert alert-success" role="alert">
+          <%= notice %>
+        </div>
       <% end %>
 
       <% if alert %>
-        <div class="alert alert-danger"><%= alert %></div>
+        <div class="alert alert-danger" role="alert">
+          <%= alert %>
+        </div>
       <% end %>
 
-      <h1>Conference Eats</h1>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Conference Eats</a>
 
-      <hr>
+        <button
+          class="navbar-toggler"
+          type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <% if rodauth.logged_in? %>
-        <%= current_account.profile&.name || current_account.email %> |
-        <%= link_to 'Sign out', rodauth.logout_path, method: :post %>
-      <% else %>
-        <%= link_to 'Sign in', rodauth.login_path %>
-        <%= link_to 'Sign up', rodauth.create_account_path %>
-      <% end %>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+          </ul>
+        </div>
 
-      <hr>
+        <span class="navbar-text mr-sm-2">
+          <% if rodauth.logged_in? %>
+            <%= current_account.profile&.name || current_account.email %> |
+            <%= link_to 'Sign out', rodauth.logout_path, method: :post %>
+          <% else %>
+            <%= link_to 'Sign in', rodauth.login_path %>
+            <%= link_to 'Sign up', rodauth.create_account_path %>
+          <% end %>
+        </span>
+      </nav>
     </header>
 
     <main role="main">

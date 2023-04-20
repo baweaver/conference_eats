@@ -95,3 +95,5 @@ gem 'timezone', '~> 1.0'
 
 gem 'rodauth-rails'
 gem 'action_policy'
+
+gem "cssbundling-rails", "~> 1.1"

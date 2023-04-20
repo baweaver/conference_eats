@@ -1,38 +1,43 @@
 <section id="gathering-list" aria-label="gathering list">
-  <% gatherings.each do |gathering| %>
-    <article
-      class="gathering"
-      aria-labelledby="gathering-title"
-      aria-describedby="gathering-description"
-      tabindex="0"
-      aria-posinset="1"
-      aria-setsize="1"
-    >
-      <%= link_to gathering_path(gathering) do %>
-        <h3 class="gathering-title"><%= gathering.name %></h3>
-      <% end %>
+  <div class="row">
+    <% gatherings.each do |gathering| %>
+      <div class="col col-md-4">
+        <article
+          class="gathering card"
+          aria-labelledby="gathering-title"
+          aria-describedby="gathering-description"
+          tabindex="0"
+          aria-posinset="1"
+          aria-setsize="1"
+        >
+          <%=
+            image_tag('railsconf_2023.jpg',
+              class: 'card-img-top',
+              alt: "RailsConf Banner featuring Atlanta Georgia"
+            )
+          %>
 
-      <figure>
-        <%=
-          image_tag('railsconf_2023.jpg',
-            alt: "RailsConf Banner featuring Atlanta Georgia",
-            height: '200px',
-            width: '300px'
-          )
-        %>
-      </figure>
+          <div class="card-body">
+            <%= link_to gathering_path(gathering) do %>
+              <h3 class="gathering-title card-title"><%= gathering.name %></h3>
+            <% end %>
 
-      <div class="gathering-description" aria-label="gathering description">
-        <%= gathering.description %>
+            <div class="gathering-description card-subtitle mb-2 text-muted" aria-label="gathering description">
+              <%= gathering.description %>
+            </div>
+
+            <div class="card-body">
+              <div class="gathering-location" aria-label="gathering location">
+                <%= gathering.location %>
+              </div>
+
+              <span class="gathering-time" aria-label="gathering time">
+                on <time datetime="2023-04-24 8:00">April 24th</time> to <time datetime="2023-04-26 17:00">April 26th 2023</time>
+              </span>
+            </div>
+          </div>
+        </article>
       </div>
-
-      <div class="gathering-location" aria-label="gathering location">
-        <%= gathering.location %>
-      </div>
-
-      <div class="gathering-time" aria-label="gathering time">
-        <time datetime="2023-04-24 8:00">April 24th</time> to <time datetime="2023-04-26 17:00">April 26th 2023</time>
-      </div>
-    </article>
-  <% end %>
+    <% end %>
+  </div>
 </section>
