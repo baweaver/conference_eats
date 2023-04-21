@@ -1,41 +1,53 @@
-<h2><%= @gathering.name %></h2>
+<div class="hero is-info">
+  <div class="hero-body">
+    <h2 class="title"><%= @gathering.name %></h2>
 
-<figure>
-  <%=
-    image_tag('railsconf_2023.jpg',
-      alt: "RailsConf Banner featuring Atlanta Georgia",
-      height: '200px',
-      width: '300px'
-    )
-  %>
-</figure>
-
-<div class="gathering-description" aria-label="gathering description">
-  <%= @gathering.description %>
+    <div class="gathering-location subtitle" aria-label="gathering location">
+      <%= @gathering.location %>
+    </div>
+  </div>
 </div>
 
-<div class="gathering-location" aria-label="gathering location">
-  <%= @gathering.location %>
-</div>
+<div class="section">
+  <figure>
+    <%=
+      image_tag('railsconf_2023.jpg',
+        alt: "RailsConf Banner featuring Atlanta Georgia",
+        height: '200px',
+        width: '300px'
+      )
+    %>
+  </figure>
 
-<div class="gathering-time" aria-label="gathering time">
-  <time datetime="<%= @gathering.start_date %>" aria-label="start date">
-    <%= @gathering.start_date %>
-  </time>
+  <div class="gathering-description" aria-label="gathering description">
+    <%= @gathering.description %>
+  </div>
 
-  to
+  <div class="gathering-time" aria-label="gathering time">
+    <time datetime="<%= @gathering.start_date %>" aria-label="start date">
+      <%= @gathering.start_date %>
+    </time>
 
-  <time datetime="<%= @gathering.end_date %>" aria-label="end date">
-    <%= @gathering.end_date %>
-  </time>
-</div>
+    to
 
-<h3>Current Outings</h3>
+    <time datetime="<%= @gathering.end_date %>" aria-label="end date">
+      <%= @gathering.end_date %>
+    </time>
+  </div>
 
-<% @gathering.outings.each do |outing| %>
-  <article>
-    <%= link_to(gathering_outing_path(gathering_id: @gathering.id, id: outing)) do %>
-      <h3><%= outing.name %></h3>
+  <hr>
+
+  <h3 class="subtitle">Current Outings</h3>
+
+  <div class="columns">
+    <% @gathering.outings.each do |outing| %>
+      <article class="card column is-one-quarter">
+        <div class="card-content">
+          <%= link_to(gathering_outing_path(gathering_id: @gathering.id, id: outing)) do %>
+            <h3><%= outing.name %></h3>
+          <% end %>
+        </div>
+      </article>
     <% end %>
-  </article>
-<% end %>
+  </div>
+</div>

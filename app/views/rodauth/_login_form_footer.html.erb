@@ -1,5 +1,9 @@
 <% unless rodauth.login_form_footer_links.empty? %>
-  <%== rodauth.login_form_footer_links_heading %>
+  <hr>
+
+  <span class="subtitle">
+    <%== rodauth.login_form_footer_links_heading %>
+  </span>
 
   <ul>
     <% rodauth.login_form_footer_links.sort.each do |_, link, text| %>

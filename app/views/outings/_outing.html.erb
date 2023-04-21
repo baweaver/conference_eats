@@ -1,36 +1,52 @@
 <div id="<%= dom_id outing %>">
-  <h3><%= outing.name %></h3>
+  <h3 class="title"><%= outing.name %></h3>
 
-  <div class="outing-description" aria-label="outing description">
+  <div class="outing-description subtitle" aria-label="outing description">
     <%= outing.description %>
   </div>
 
-  <div class="outing-location" aria-label="outing location">
+  <div class="outing-location mb-4" aria-label="outing location">
     Attendees will be meeting at <%= @gathering.location %> to find their groups.
   </div>
 
-  <div class="outing-group" aria-label="outing group">
+  <div class="outing-group message <%= @assigned_group.present? ? 'is-success' : 'is-info' %>" aria-label="outing group">
     <% if @assigned_group.present? %>
-      Your Group is: <%=
-        link_to(
-          @assigned_group.name,
-          gathering_outing_group_path(
-            gathering_id: outing.gathering_id,
-            outing_id: outing.id,
-            id: @assigned_group.id
+      <div class="message-header">
+        You've Been Assigned a Group
+      </div>
+
+      <div class="message-body">
+        Your Group is: <%=
+          link_to(
+            @assigned_group.name,
+            gathering_outing_group_path(
+              gathering_id: outing.gathering_id,
+              outing_id: outing.id,
+              id: @assigned_group.id
+            )
           )
-        )
-      %>
+        %>
 
-      <br>
+        <br>
 
-      They are currently meeting at <%= @assigned_group.location %>
+        They are currently meeting at <%= @assigned_group.location %>
+      </div>
     <% else %>
-      <%= button_to "Join Group", gathering_outing_join_path(outing_id: outing.id) %>
+      <div class="message-header">
+        You Do Not Have a Group Yet
+      </div>
+
+      <div class="message-body">
+        Make sure to join a group if you'd like to be a part of this outing:
+
+        <br>
+
+        <%= button_to "Join Group", gathering_outing_join_path(outing_id: outing.id), class: 'button is-success' %>
+      </div>
     <% end %>
   </div>
 
-  <div class="outing-time" aria-label="outing time">
+  <div class="outing-time mb-4" aria-label="outing time">
     <time datetime="<%= outing.start_time %>" aria-label="start date">
       <%= outing.start_time.to_formatted_s(:short) %>
     </time>

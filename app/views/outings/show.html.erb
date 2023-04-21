@@ -1,10 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<div class="section">
+  <% if notice.present? %>
+    <p class="notification is-primary"><%= notice %></p>
+  <% end %>
 
-<%= render @outing %>
+  <%= render @outing %>
 
-<div>
-  <%= link_to "Edit this outing", edit_gathering_outing_path(@outing) %> |
-  <%= link_to "Back to outings", gathering_outings_path %>
+  <div>
+    <%= link_to "Back to outings", gathering_outings_path, class: "button is-info" %>
 
-  <%= button_to "Destroy this outing", gathering_outings_path, method: :delete %>
+    <% if current_account.admin? %>
+      <%= link_to "Edit this outing", edit_gathering_outing_path(@outing), class: "button is-info" %>
+
+      <%= button_to "Destroy this outing", gathering_outings_path, method: :delete, class: 'button is-danger' %>
+    <% end %>
+  </div>
 </div>

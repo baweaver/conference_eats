@@ -1,10 +1,23 @@
-<p style="color: green"><%= notice %></p>
+<div class="section">
+  <% if notice.present? %>
+    <p class="notification is-primary"><%= notice %></p>
+  <% end %>
 
-<%= render @group %>
+  <%= render @group %>
 
-<div>
-  <%= link_to "Edit this group", edit_gathering_outing_group_path(@group) %> |
-  <%= link_to "Back to outing", gathering_outing_path(id: @group.outing_id) %>
+  <div class="field is-grouped">
+    <span class="control">
+      <%= link_to "Edit this group", edit_gathering_outing_group_path(@group), class: 'button is-warning' %>
+    </span>
 
-  <%= button_to "Destroy this group", gathering_outing_group_path(@group), method: :delete %>
+    <span class="control">
+      <%= link_to "Back to outing", gathering_outing_path(id: @group.outing_id), class: 'button is-info' %>
+    </span>
+
+    <% if current_account.admin? %>
+      <span class="control">
+        <%= button_to "Destroy this group", gathering_outing_group_path(@group), method: :delete, class: 'button is-danger' %>
+      </span>
+    <% end %>
+  </div>
 </div>

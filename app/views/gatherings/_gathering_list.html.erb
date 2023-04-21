@@ -1,7 +1,7 @@
-<section id="gathering-list" aria-label="gathering list">
-  <div class="row">
+<section id="gathering-list" class="section" aria-label="gathering list">
+  <div class="columns">
     <% gatherings.each do |gathering| %>
-      <div class="col col-md-4">
+      <div class="column is-one-quarter">
         <article
           class="gathering card"
           aria-labelledby="gathering-title"
@@ -12,23 +12,23 @@
         >
           <%=
             image_tag('railsconf_2023.jpg',
-              class: 'card-img-top',
+              class: 'card-image',
               alt: "RailsConf Banner featuring Atlanta Georgia"
             )
           %>
 
-          <div class="card-body">
+          <div class="card-content">
             <%= link_to gathering_path(gathering) do %>
-              <h3 class="gathering-title card-title"><%= gathering.name %></h3>
+              <h3 class="gathering-title title"><%= gathering.name %></h3>
             <% end %>
 
-            <div class="gathering-description card-subtitle mb-2 text-muted" aria-label="gathering description">
-              <%= gathering.description %>
+            <div class="gathering-location subtitle" aria-label="gathering location">
+              <%= gathering.location %>
             </div>
 
-            <div class="card-body">
-              <div class="gathering-location" aria-label="gathering location">
-                <%= gathering.location %>
+            <div class="content">
+              <div class="gathering-description" aria-label="gathering description">
+                <%= gathering.description %>
               </div>
 
               <span class="gathering-time" aria-label="gathering time">

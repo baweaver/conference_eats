@@ -1,14 +1,14 @@
 <%= form_with url: rodauth.create_account_path, method: :post, data: { turbo: false } do |form| %>
   <%# Name %>
-  <div class="form-group mb-3">
-    <%= form.label :name, 'Name', class: 'form-label' %>
+  <div class="field">
+    <%= form.label :name, 'Name', class: 'label' %>
 
     <%=
       form.text_field(:name,
         value: params[:name],
         id: 'name',
         required: true,
-        class: "form-control #{'is-invalid' if rodauth.field_error('name')}",
+        class: "input #{'is-invalid' if rodauth.field_error('name')}",
         aria: (
           {
             invalid: true,
@@ -28,8 +28,8 @@
   </div>
 
   <%# Email %>
-  <div class="form-group mb-3">
-    <%= form.label "email", 'Email', class: "form-label" %>
+  <div class="field">
+    <%= form.label "email", 'Email', class: "label" %>
 
     <%=
       form.email_field(rodauth.login_param,
@@ -37,7 +37,7 @@
         id: "email",
         autocomplete: "email",
         required: true,
-        class: "form-control #{"is-invalid" if rodauth.field_error(rodauth.login_param)}",
+        class: "input #{"is-invalid" if rodauth.field_error(rodauth.login_param)}",
         aria: (
           {
             invalid: true,
@@ -57,8 +57,8 @@
   </div>
 
   <% if rodauth.require_login_confirmation? %>
-    <div class="form-group mb-3">
-      <%= form.label "login-confirm", rodauth.login_confirm_label, class: "form-label" %>
+    <div class="field">
+      <%= form.label "login-confirm", rodauth.login_confirm_label, class: "label" %>
 
       <%=
         form.email_field(rodauth.login_confirm_param,
@@ -66,7 +66,7 @@
           id: "login-confirm",
           autocomplete: "email",
           required: true,
-          class: "form-control #{"is-invalid" if rodauth.field_error(rodauth.login_confirm_param)}",
+          class: "input #{"is-invalid" if rodauth.field_error(rodauth.login_confirm_param)}",
           aria: (
             {
               invalid: true,
@@ -87,8 +87,8 @@
   <% end %>
 
   <% if rodauth.create_account_set_password? %>
-    <div class="form-group mb-3">
-      <%= form.label "password", rodauth.password_label, class: "form-label" %>
+    <div class="field">
+      <%= form.label "password", rodauth.password_label, class: "label" %>
 
       <%=
         form.password_field(rodauth.password_param,
@@ -96,7 +96,7 @@
           id: "password",
           autocomplete: rodauth.password_field_autocomplete_value,
           required: true,
-          class: "form-control #{"is-invalid" if rodauth.field_error(rodauth.password_param)}",
+          class: "input #{"is-invalid" if rodauth.field_error(rodauth.password_param)}",
           aria: (
             {
               invalid: true,
@@ -116,8 +116,8 @@
     </div>
 
     <% if rodauth.require_password_confirmation? %>
-      <div class="form-group mb-3">
-        <%= form.label "password-confirm", rodauth.password_confirm_label, class: "form-label" %>
+      <div class="field">
+        <%= form.label "password-confirm", rodauth.password_confirm_label, class: "label" %>
 
         <%=
           form.password_field(rodauth.password_confirm_param,
@@ -125,7 +125,7 @@
             id: "password-confirm",
             autocomplete: "new-password",
             required: true,
-            class: "form-control #{"is-invalid" if rodauth.field_error(rodauth.password_confirm_param)}",
+            class: "input #{"is-invalid" if rodauth.field_error(rodauth.password_confirm_param)}",
             aria: (
               {
                 invalid: true,
@@ -146,7 +146,7 @@
     <% end %>
   <% end %>
 
-  <div class="form-group mb-3">
-    <%= form.submit rodauth.create_account_button, class: "btn btn-primary" %>
+  <div class="field">
+    <%= form.submit rodauth.create_account_button, class: "button is-primary" %>
   </div>
 <% end %>

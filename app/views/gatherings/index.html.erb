@@ -1,6 +1,6 @@
-<div class="container-fluid">
+<div class="container section">
   <% if @gatherings.any?(&:current?) %>
-    <h2>Current Gatherings</h2>
+    <h2 class="title">Current Gatherings</h2>
 
     <%= render(
       partial: 'gathering_list',
@@ -9,7 +9,7 @@
   <% end %>
 
   <% if @gatherings.any?(&:future?) %>
-    <h2>Upcomming Gatherings</h2>
+    <h2 class="title">Upcomming Gatherings</h2>
 
     <%= render(
       partial: 'gathering_list',
@@ -18,7 +18,7 @@
   <% end %>
 
   <% if @gatherings.any?(&:past?) %>
-    <h2>Past Gatherings</h2>
+    <h2 class="title">Past Gatherings</h2>
 
     <%= render(
       partial: 'gathering_list',

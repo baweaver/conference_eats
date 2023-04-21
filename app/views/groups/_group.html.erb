@@ -1,19 +1,23 @@
 <div id="<%= dom_id group %>">
-  <h3><%= group.name %></h3>
+  <h3 class="title">Your Group: <%= group.name %></h3>
 
-  <ul>
-    <li>Meeting at: <%= group.location %></li>
-    <li>Updated at: <%= group.updated_at %></li>
-    <li>Current Count: <%= group.group_members.count %></li>
-    <li>Capacity: <%= group.max_size %></li>
-  </ul>
+  <div class="content">
+    <ul>
+      <li>Meeting at: <%= group.location %></li>
+      <li>Updated at: <%= group.updated_at %></li>
+      <li>Current Count: <%= group.group_members.count %></li>
+      <li>Capacity: <%= group.max_size %></li>
+    </ul>
+  </div>
 
   <%# Admin Only later %>
-  <h4>Members</h4>
+  <h4 class="title is-4">Members</h4>
 
-  <ul>
-    <% group.accounts.each do |member| %>
-      <li><%= member.email %></li>
-    <% end %>
-  </ul>
+  <div class="content">
+    <ul>
+      <% group.accounts.each do |member| %>
+        <li><%= member.email %></li>
+      <% end %>
+    </ul>
+  </div>
 </main>
